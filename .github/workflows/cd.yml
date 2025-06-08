@@ -21,7 +21,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            cd ~/hapi-forum-app
+            cd ~/hapi-forum-ci-cd-sec-app
             git pull origin master
             npm install
             npm run migrate up
