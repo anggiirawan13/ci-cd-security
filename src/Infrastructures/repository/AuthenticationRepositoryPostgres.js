@@ -8,6 +8,7 @@ class AuthenticationRepositoryPostgres extends AuthenticationRepository {
   }
 
   async addToken(token) {
+    console.log('hello world');
     const query = {
       text: 'INSERT INTO authentications VALUES ($1)',
       values: [token]
