@@ -16,9 +16,8 @@ jobs:
       - name: Install Railway CLI
         run: npm install -g @railway/cli
 
-      - name: Deploy to Railway
-        run: railway up -- --yes
-        working-directory: ${{ github.workspace }}
+      - name: Deploy to Railway (with explicit project ID)
+        run: railway up --project ${{ secrets.RAILWAY_PROJECT }} --service ci-cd-security --environment production -- --yes
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 
