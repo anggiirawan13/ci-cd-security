@@ -4,4 +4,4 @@ package-lock.json
 config/database/test.json
 coverage
 .env
-ci-cd-security-webserver.pem
+ci-cd-sec-app.pem
