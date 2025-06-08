@@ -1,0 +1,7 @@
+{
+  "user": "postgres",
+  "password": "supersecretpassword",
+  "host": "localhost",
+  "port": 5432,
+  "database": "ci_cd_security_test"
+}
