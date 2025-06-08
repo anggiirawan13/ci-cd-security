@@ -19,7 +19,7 @@ jobs:
       - name: Deploy to Railway
         run: railway up -- --yes
         env:
-          RAILWAY_TOKEN: 3859b8bc-29ed-4d94-abf0-85dedb982338
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_PROJECT }}
 
 #name: Continuous Deployment
 #
