@@ -4,6 +4,7 @@ const RepliesTableTestHelper = require('../../../../tests/RepliesTableTestHelper
 const ServerTestHelper = require('../../../../tests/ServerTestHelper');
 const ThreadsTableTestHelper = require('../../../../tests/ThreadsTableTestHelper');
 const UsersTableTestHelper = require('../../../../tests/UsersTableTestHelper');
+const CommentLikesTableTestHelper = require('../../../../tests/CommentLikesTableTestHelper');
 const container = require('../../container');
 const pool = require('../../database/postgres/pool');
 const createServer = require('../createServer');
@@ -142,6 +143,11 @@ describe('Threads endpoints', () => {
       await ThreadsTableTestHelper.addThread({ id: threadId, owner: 'user-123' });
       await CommentsTableTestHelper.addComment({ id: 'comment-123', threadId, owner: 'user-123' });
       await RepliesTableTestHelper.addReply({ id: 'reply-123', commentId: 'comment-123', owner: 'user-123' });
+
+      await CommentLikesTableTestHelper.addLike({
+        commentId: 'comment-123',
+        userId: 'user-123'
+      });
 
       const response = await server.inject({
         method: 'GET',

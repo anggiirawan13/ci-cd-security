@@ -137,5 +137,23 @@ describe('ThreadRepositoryPostgres', () => {
         await expect(threadRepositoryPostgres.verifyThreadAvailability('thread-123')).resolves.not.toThrowError(NotFoundError);
       });
     });
+
+    describe('checkThreadExists function', () => {
+      it('should not throw NotFoundError when thread exists', async () => {
+        await UsersTableTestHelper.addUser({ id: 'user-123' });
+        await ThreadsTableTestHelper.addThread({ id: 'thread-123', owner: 'user-123' });
+        const threadRepository = new ThreadRepositoryPostgres(pool, () => '123', Date);
+
+        await expect(threadRepository.checkThreadExists('thread-123')).resolves.not.toThrow();
+      });
+
+      it('should throw NotFoundError when thread does not exist', async () => {
+        const threadRepository = new ThreadRepositoryPostgres(pool, () => '123', Date);
+
+        await expect(threadRepository.checkThreadExists('non-existent-thread'))
+          .rejects
+          .toThrowError(NotFoundError);
+      });
+    });
   });
 });

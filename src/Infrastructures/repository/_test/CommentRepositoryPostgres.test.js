@@ -173,5 +173,22 @@ describe('CommentRepositoryPostgres', () => {
         await expect(commentRepositoryPostgres.verifyCommentOwner('comment-123', 'user-999')).rejects.toThrowError(AuthorizationError);
       });
     });
+
+    describe('checkCommentExists function', () => {
+      it('should not throw error when comment exists', async () => {
+        await CommentsTableTestHelper.addComment({ id: 'comment-123', threadId: 'thread-123', owner: 'user-123' });
+        const commentRepo = new CommentRepositoryPostgres(pool, () => '123', Date);
+
+        await expect(commentRepo.checkCommentExists('comment-123')).resolves.not.toThrow();
+      });
+
+      it('should throw NotFoundError when comment does not exist', async () => {
+        const commentRepo = new CommentRepositoryPostgres(pool, () => '123', Date);
+
+        await expect(commentRepo.checkCommentExists('non-existent-comment'))
+          .rejects
+          .toThrowError(NotFoundError);
+      });
+    });
   });
 });
