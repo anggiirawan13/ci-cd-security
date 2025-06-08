@@ -42,7 +42,7 @@ jobs:
           npm install pg@8.6.0
 
       - name: Run migration
-        run: npm run migrate:test
+        run: npm run migrate:test up
         env:
           PGUSER: ${{ secrets.PGUSER }}
           PGPASSWORD: ${{ secrets.PGPASSWORD }}
