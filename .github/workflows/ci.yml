@@ -31,10 +31,15 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 16.20.2
 
       - name: Install dependencies
         run: npm install
+
+      - name: Uninstall default pg & install specific pg@8.6.0
+        run: |
+          npm uninstall pg
+          npm install pg@8.6.0
 
       - name: Run migration
         run: npm run migrate:test
