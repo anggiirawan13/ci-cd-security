@@ -312,5 +312,4 @@ describe('GetThreadUseCase', () => {
     expect(result.comments[0].replies[0].id).toBe('reply-1');
     expect(result.comments[0].replies[1].id).toBe('reply-2');
   });
-
 });
